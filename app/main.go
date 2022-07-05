@@ -2,15 +2,17 @@ package main
 
 import (
 	"fmt"
+	"group-project-kel5/config"
+	_entity "group-project-kel5/entity"
 )
 
 func main() {
-	// conn := db.InitDB()
+	conn := config.InitDB()
 	// db.MigrateDB(conn)
-	// aksesBook := entity.aksesBook{DB: conn}
+	aksesUser := _entity.AksesUsers{DB: conn}
+	// aksesBuku := _entity.AksesBuku{DB: conn}
 	var input int = 0
-	var input_1 int
-	for input != 0 {
+	for input != 99 {
 		fmt.Println("=============================================================")
 		fmt.Println("|SELAMAT DATANG DI PERPUSTAKAAN UNIVERSITAS LANGSUNG SARJANA|")
 		fmt.Println("=============================================================")
@@ -20,24 +22,47 @@ func main() {
 		fmt.Println("0. Kembali")
 		fmt.Println("Masukkan Pilihan menu: ")
 		fmt.Scanln(&input)
-
-		switch input_1 {
+		switch input {
 		case 1:
-			username, result, err := user.LoginUser(DBConn)
-			if err != nil {
-				fmt.Println("Login Gagal, username tidak terdaftar")
-			}
-			if result {
-				fmt.Println("\n=Login /berhasil=")
-				fmt.Println("\n=================")
-				fmt.Println("Selamat Datang\nPilih menu dibawah ini")
-				fmt.Println("1. Sewa Buku\n2. Tambah Buku")
-			}
-			// var
+			// AksesLogin := _entity.AksesLogin{DB: conn}
+			// username, result, err := _entity.Login(DBConn)
+			// if err != nil {
+			// 	fmt.Println("Login Gagal, username tidak terdaftar")
+			// }
+			// if result {
+			// 	fmt.Println("\n=Login /berhasil=")
+			// 	fmt.Println("\n=================")
+			// 	fmt.Println("Selamat Datang\nPilih menu dibawah ini")
+			// 	fmt.Println("1. Sewa Buku\n2. Tambah Buku")
+			// }
+
 			// fmt.Print("Masukkan username: ")
 			// fmt.Scanln(&)
 			// fmt.Print("Masukkan password: ")
 			// fmt.Scanln(&)
+		case 2:
+			var newUsers _entity.Users
+			fmt.Print("Masukkan nama: ")
+			fmt.Scanln(&newUsers.Nama)
+			fmt.Print("Masukkan username: ")
+			fmt.Scanln(&newUsers.Username)
+			fmt.Print("Masukkan password: ")
+			fmt.Scanln(&newUsers.Password)
+
+			result := aksesUser.TambahUser(newUsers)
+			if result.ID == 0 {
+				fmt.Println("Tidak bisa input user")
+				break
+			}
+			fmt.Println("Berhasil input user")
+		case 3:
+			AksesBuku := _entity.AksesBuku{DB: conn}
+			for _, val := range AksesBuku.GetAllData() {
+				fmt.Println(val)
+			}
+		default:
+			continue
 		}
 	}
+	fmt.Println("Terima Kasih")
 }

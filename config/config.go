@@ -1,22 +1,29 @@
-package main
+package config
 
 import (
-	"database/sql"
-	"fmt"
-	"time"
+	"log"
 
-	_ "github.com/go-sql-driver/mysql"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
+	// _ "github.com/go-sql-driver/mysql"
 )
 
 // ...
-func main() {
-	db, err := sql.Open("mysql", "root@tcp(localhost:3306)/Kelompok5")
+func InitDB() *gorm.DB {
+	db, err := gorm.Open(mysql.Open("root:Mihrimah220918@tcp(localhost:3306)/Kelompok5"), &gorm.Config{})
 	if err != nil {
-		panic(err)
+		// panic(err)
+		log.Fatal(err)
+		return nil
 	}
-	fmt.Println("Koneksi ke Server Berhasil!.")
+	return db
+	// fmt.Println("Koneksi ke Server Berhasil!.")
 
-	db.SetConnMaxLifetime(time.Minute * 3)
-	db.SetMaxOpenConns(10)
-	db.SetMaxIdleConns(10)
+	// db.SetConnMaxLifetime(time.Minute * 3)
+	// db.SetMaxOpenConns(10)
+	// db.SetMaxIdleConns(10)
 }
+
+// func MigrateDB(conn *gorm.DB) {
+// 	conn.AutoMigrate(entity.Buku{})
+// }
