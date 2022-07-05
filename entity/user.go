@@ -15,7 +15,7 @@ type Users struct {
 	Password   string
 	Created_at string
 	Updated_at string
-	Book       []Buku `gorm:"foreignKey:Sumber_Buku"`
+	Book       []Bukus `gorm:"foreignKey:Sumber_Buku"`
 }
 
 type AksesUsers struct {
@@ -23,13 +23,6 @@ type AksesUsers struct {
 }
 
 func (au *AksesUsers) TambahUser(newUsers Users) Users {
-	// fmt.Print("Masukkan nama: ")
-	// fmt.Scanln(&newUsers.Nama)
-	// fmt.Print("Masukkan username: ")
-	// fmt.Scanln(&newUsers.Username)
-	// fmt.Print("Masukkan password: ")
-	// fmt.Scanln(&newUsers.Password)
-
 	err := au.DB.Create(&newUsers).Error
 	if err != nil {
 		log.Fatal(err)

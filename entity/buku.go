@@ -1,13 +1,12 @@
 package entity
 
 import (
-	"fmt"
 	"log"
 
 	"gorm.io/gorm"
 )
 
-type Buku struct {
+type Bukus struct {
 	gorm.Model
 	Judul_Buku   string
 	Penulis      string
@@ -22,8 +21,8 @@ type AksesBuku struct {
 	DB *gorm.DB
 }
 
-func (ab *AksesBuku) GetAllData() []Buku {
-	var daftarBuku = []Buku{}
+func (ab *AksesBuku) GetAllData() []Bukus {
+	var daftarBuku = []Bukus{}
 	// err := as.DB.Raw("Select * from buku").Scan(&daftarBuku)
 	err := ab.DB.Find(&daftarBuku)
 	if err.Error != nil {
@@ -33,29 +32,27 @@ func (ab *AksesBuku) GetAllData() []Buku {
 	return daftarBuku
 }
 
-func (ab *AksesBuku) AddBuku(newBuku []Buku) []Buku {
-	var tambahbuku = []Buku{}
-	fmt.Print("Masukkan Judul Buku: ")
-	fmt.Scanln(&newBuku.Judul_Buku)
-	fmt.Print("Masukkan Penulis: ")
-	fmt.Scanln(&newBuku.Penulis)
-	fmt.Print("Masukkan Penerbit: ")
-	fmt.Scanln(&newBuku.Penerbit)
-	fmt.Print("Masukkan Tahun Penerbit: ")
-	fmt.Scanln(&newBuku.Tahun_terbit)
-	fmt.Print("Masukkan Sumber Buku: ")
-	fmt.Scanln(&newBuku.Sumber_Buku)
+func (ab *AksesBuku) AddBuku(newBuku Bukus) Bukus {
 	err := ab.DB.Create(&newBuku).Error
 	if err != nil {
 		log.Fatal(err)
-		return tambahbuku
+		return Bukus{}
 	}
 	return newBuku
 }
 
+// func (au *AksesUsers) TambahUser(newUsers Users) Users {
+// 	err := au.DB.Create(&newUsers).Error
+// 	if err != nil {
+// 		log.Fatal(err)
+// 		return Users{}
+// 	}
+// 	return newUsers
+// }
+
 func (ab *AksesBuku) HapusBuku(IDBuku int) bool {
 	// tmp := Buku{ID: IDBuku}
-	postExc := ab.DB.Where("ID = ?", IDBuku).Delete(&Buku{})
+	postExc := ab.DB.Where("ID = ?", IDBuku).Delete(&Bukus{})
 	// err := as.DB.Delete(&tmp)
 	//cek apakah postexc ada isinya ?
 	if err := postExc.Error; err != nil {
