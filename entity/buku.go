@@ -32,6 +32,26 @@ func (ab *AksesBuku) GetAllData() []Buku {
 	return daftarBuku
 }
 
+// func (ab *AksesBuku) AddBuku(newBuku []Buku) []Buku {
+// 	var tambahbuku = []Buku{}
+// 	fmt.Print("Masukkan Judul Buku: ")
+// 	fmt.Scanln(&newBuku.Judul_Buku)
+// 	fmt.Print("Masukkan Penulis: ")
+// 	fmt.Scanln(&newBuku.Penulis)
+// 	fmt.Print("Masukkan Penerbit: ")
+// 	fmt.Scanln(&newBuku.Penerbit)
+// 	fmt.Print("Masukkan Tahun Penerbit: ")
+// 	fmt.Scanln(&newBuku.Tahun_terbit)
+// 	fmt.Print("Masukkan Sumber Buku: ")
+// 	fmt.Scanln(&newBuku.Sumber_Buku)
+// 	err := ab.DB.Create(&newBuku).Error
+// 	if err != nil {
+// 		log.Fatal(err)
+// 		return tambahbuku
+// 	}
+// 	return newBuku
+// }
+
 func (ab *AksesBuku) HapusBuku(IDBuku int) bool {
 	// tmp := Buku{ID: IDBuku}
 	postExc := ab.DB.Where("ID = ?", IDBuku).Delete(&Buku{})
@@ -48,3 +68,7 @@ func (ab *AksesBuku) HapusBuku(IDBuku int) bool {
 	}
 	return true
 }
+
+// func MigrateDB(conn *gorm.DB) {
+// 	conn.AutoMigrate([]Buku)
+// }
