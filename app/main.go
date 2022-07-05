@@ -3,13 +3,14 @@ package main
 import (
 	"fmt"
 	"group-project-kel5/config"
+	_user "group-project-kel5/controller/user"
 	_entity "group-project-kel5/entity"
 )
 
 func main() {
 	conn := config.InitDB()
 	config.MigrateDB(conn)
-	aksesUser := _entity.AksesUsers{DB: conn}
+	aksesUser := _user.AksesUsers{DB: conn}
 	// aksesBuku := _entity.AksesBuku{DB: conn}
 	var input int = 0
 	for input != 99 {
@@ -42,13 +43,6 @@ func main() {
 			// fmt.Scanln(&)
 		case 2:
 			var newUsers _entity.Users
-			fmt.Print("Masukkan nama: ")
-			fmt.Scanln(&newUsers.Nama)
-			fmt.Print("Masukkan username: ")
-			fmt.Scanln(&newUsers.Username)
-			fmt.Print("Masukkan password: ")
-			fmt.Scanln(&newUsers.Password)
-
 			result := aksesUser.TambahUser(newUsers)
 			if result.ID == 0 {
 				fmt.Println("Tidak bisa input user")
