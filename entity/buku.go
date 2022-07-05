@@ -8,7 +8,6 @@ import (
 
 type Buku struct {
 	gorm.Model
-	ID           int
 	Judul_Buku   string
 	Penulis      string
 	Penerbit     string
