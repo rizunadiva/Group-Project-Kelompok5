@@ -12,6 +12,7 @@ func main() {
 	aksesUser := _entity.AksesUsers{DB: conn}
 	// aksesBuku := _entity.AksesBuku{DB: conn}
 	var input int = 0
+	var newUsers _entity.Users
 	for input != 99 {
 		fmt.Println("=============================================================")
 		fmt.Println("|SELAMAT DATANG DI PERPUSTAKAAN UNIVERSITAS LANGSUNG SARJANA|")
@@ -25,19 +26,29 @@ func main() {
 		switch input {
 		case 1:
 			// AksesLogin := _entity.AksesLogin{DB: conn}
-			result, err := 
+			result, err := aksesUser.LoginUser(newUsers)
 			if err != nil {
 				fmt.Println("Login Gagal, username tidak terdaftar")
 			}
 			if result {
+				var input2 int
 				fmt.Println("\n=Login /berhasil=")
 				fmt.Println("\n=================")
 				fmt.Println("Selamat Datang\nPilih menu dibawah ini")
 				fmt.Println("1. Lihat Profil\n2. Edit Profil\n3. Hapus Profil\n4. Tambah Buku\n5. Sewa Buku\n6. Edit Buku\n7. Hapus Buku\n8. Kembalikan Buku\n9. Buku Saya")
+				fmt.Print("Pilih Menu : ")
+				fmt.Scanln(&input2)
+				switch input2 {
+				case 1:
+				case 2:
+				case 3:
+				case 4:
+
+				}
 			}
 
 		case 2:
-			var newUsers _entity.Users
+
 			fmt.Print("Masukkan nama: ")
 			fmt.Scanln(&newUsers.Nama)
 			fmt.Print("Masukkan username: ")

@@ -38,19 +38,20 @@ func (au *AksesUsers) TambahUser(newUsers Users) Users {
 	return newUsers
 }
 
-func (au *AksesUsers) LoginUser(bool, error) {
-	newUsers := Users{}
+func (au *AksesUsers) LoginUser(newUsers Users) (result bool, err error) {
+	// newUsers := Users{}
+	var Username, Password string
 	fmt.Println("Silahkan Masukkan Username dan Password Anda")
 	fmt.Print("Username: ")
 	fmt.Scanln(&newUsers.Username)
 	fmt.Print("Password: ")
 	fmt.Scanln(&newUsers.Password)
-	var daftarUser = []Users{}
-	result, err := au.DB.Raw("SELECT username, password FROM users WHERE username = ? AND password = ?").Scan(&daftarUser)
+	// var daftarUser = []Users{}
+	result_ := au.DB.Where("Username = ? AND Password = ?", Username, Password).Find(&newUsers)
 	// err := ab.DB.Find(&daftarBuku)
-	if err.Error != nil {
-		log.Fatal(err.Statement.SQL.String())
-		return
+	if result_.Error != nil {
+		log.Fatal(result_.Statement.SQL.String())
+		return false, nil
 	}
-	return result, nil
+	return true, nil
 }
