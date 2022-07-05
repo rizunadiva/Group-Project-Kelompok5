@@ -1,6 +1,7 @@
 package config
 
 import (
+	"group-project-kel5/entity"
 	"log"
 
 	"gorm.io/driver/mysql"
@@ -10,7 +11,7 @@ import (
 
 // ...
 func InitDB() *gorm.DB {
-	db, err := gorm.Open(mysql.Open("root:Mihrimah220918@tcp(localhost:3306)/Kelompok5"), &gorm.Config{})
+	db, err := gorm.Open(mysql.Open("root:Mihrimah220918@tcp(localhost:3306)/Kelompok5?charset=utf8mb4&parseTime=True&loc=Local"), &gorm.Config{})
 	if err != nil {
 		// panic(err)
 		log.Fatal(err)
@@ -24,6 +25,6 @@ func InitDB() *gorm.DB {
 	// db.SetMaxIdleConns(10)
 }
 
-// func MigrateDB(conn *gorm.DB) {
-// 	conn.AutoMigrate(entity.Buku{})
-// }
+func MigrateDB(conn *gorm.DB) {
+	conn.AutoMigrate(entity.Users{})
+}

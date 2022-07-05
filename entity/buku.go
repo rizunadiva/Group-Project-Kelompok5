@@ -14,6 +14,8 @@ type Buku struct {
 	Penerbit     string
 	Tahun_terbit string
 	Sumber_Buku  int
+	Created_at   string
+	Updated_at   string
 }
 
 type AksesBuku struct {

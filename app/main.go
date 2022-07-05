@@ -8,7 +8,7 @@ import (
 
 func main() {
 	conn := config.InitDB()
-	// db.MigrateDB(conn)
+	config.MigrateDB(conn)
 	aksesUser := _entity.AksesUsers{DB: conn}
 	// aksesBuku := _entity.AksesBuku{DB: conn}
 	var input int = 0

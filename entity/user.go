@@ -4,14 +4,16 @@ import (
 	"log"
 
 	"gorm.io/gorm"
+	// "github.com/google/uuid"
 )
 
 type Users struct {
 	gorm.Model
-	ID       int
-	Nama     string
-	Username string
-	Password string
+	Nama       string
+	Username   string
+	Password   string
+	Created_at string
+	Updated_at string
 }
 
 type AksesUsers struct {
