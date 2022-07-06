@@ -13,7 +13,7 @@ func main() {
 	aksesBuku := _entity.AksesBuku{DB: conn}
 	var input int = 0
 	var newUsers _entity.Users
-	var newBuku _entity.Bukus
+	var newBuku _entity.Books
 	for input != 99 {
 		fmt.Println("=============================================================")
 		fmt.Println("|SELAMAT DATANG DI PERPUSTAKAAN UNIVERSITAS LANGSUNG SARJANA|")
@@ -21,7 +21,7 @@ func main() {
 		fmt.Println("1. Login")
 		fmt.Println("2. Register")
 		fmt.Println("3. Lihat Daftar Buku")
-		fmt.Println("0. Kembali")
+		fmt.Println("99. Kembali")
 		fmt.Println("Masukkan Pilihan menu: ")
 		fmt.Scanln(&input)
 		switch input {
@@ -41,8 +41,11 @@ func main() {
 				fmt.Scanln(&input2)
 				switch input2 {
 				case 1:
+					fmt.Println("ok")
 				case 2:
+					fmt.Println("ok")
 				case 3:
+					fmt.Println("ok")
 				case 4:
 					fmt.Print("Masukkan Judul Buku: ")
 					fmt.Scanln(&newBuku.Judul_Buku)
@@ -52,7 +55,7 @@ func main() {
 					fmt.Scanln(&newBuku.Penerbit)
 					fmt.Print("Masukkan Tahun Penerbit: ")
 					fmt.Scanln(&newBuku.Tahun_terbit)
-					fmt.Print("Masukkan Sumber Buku: ")
+					fmt.Print("Masukkan ID anda: ")
 					fmt.Scanln(&newBuku.Sumber_Buku)
 
 					resultBook := aksesBuku.AddBuku(newBuku)
@@ -62,10 +65,15 @@ func main() {
 					}
 					fmt.Println("Berhasil Input User")
 				case 5:
+					fmt.Println("ok")
 				case 6:
+					fmt.Println("ok")
 				case 7:
+					fmt.Println("ok")
 				case 8:
+					fmt.Println("ok")
 				case 9:
+					fmt.Println("ok")
 				}
 			}
 
@@ -81,16 +89,16 @@ func main() {
 			result := aksesUser.TambahUser(newUsers)
 			if result.ID == 0 {
 				fmt.Println("Tidak bisa input user")
-				break
+				// break
 			}
 			fmt.Println("Berhasil input user")
 		case 3:
-			AksesBuku := _entity.AksesBuku{DB: conn}
-			for _, val := range AksesBuku.GetAllData() {
-				fmt.Println(val)
-			}
-		default:
-			continue
+			fmt.Println("ok")
+			// 	fmt.Println("Berikut adalah daftar seluruh buku")
+			// 	// rescase3 := aksesBuku.GetAllData(daftarBuku)
+			// 	for _, val := range aksesBuku.GetAllData() {
+			// 		fmt.Println(val)
+			// 	}
 		}
 	}
 	fmt.Println("Terima Kasih")

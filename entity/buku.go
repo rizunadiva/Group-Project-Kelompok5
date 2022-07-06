@@ -6,7 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type Bukus struct {
+type Books struct {
 	gorm.Model
 	Judul_Buku   string
 	Penulis      string
@@ -21,9 +21,9 @@ type AksesBuku struct {
 	DB *gorm.DB
 }
 
-func (ab *AksesBuku) GetAllData() []Bukus {
-	var daftarBuku = []Bukus{}
-	// err := as.DB.Raw("Select * from buku").Scan(&daftarBuku)
+func (ab *AksesBuku) GetAllData() []Books {
+	var daftarBuku = []Books{}
+	// err := as.DB.Raw("Select * from books").Scan(&daftarBuku)
 	err := ab.DB.Find(&daftarBuku)
 	if err.Error != nil {
 		log.Fatal(err.Statement.SQL.String())
@@ -32,11 +32,11 @@ func (ab *AksesBuku) GetAllData() []Bukus {
 	return daftarBuku
 }
 
-func (ab *AksesBuku) AddBuku(newBuku Bukus) Bukus {
+func (ab *AksesBuku) AddBuku(newBuku Books) Books {
 	err := ab.DB.Create(&newBuku).Error
 	if err != nil {
 		log.Fatal(err)
-		return Bukus{}
+		return Books{}
 	}
 	return newBuku
 }
@@ -52,7 +52,7 @@ func (ab *AksesBuku) AddBuku(newBuku Bukus) Bukus {
 
 func (ab *AksesBuku) HapusBuku(IDBuku int) bool {
 	// tmp := Buku{ID: IDBuku}
-	postExc := ab.DB.Where("ID = ?", IDBuku).Delete(&Bukus{})
+	postExc := ab.DB.Where("ID = ?", IDBuku).Delete(&Books{})
 	// err := as.DB.Delete(&tmp)
 	//cek apakah postexc ada isinya ?
 	if err := postExc.Error; err != nil {

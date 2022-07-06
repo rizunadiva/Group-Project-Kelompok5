@@ -15,7 +15,7 @@ type Users struct {
 	Password   string
 	Created_at string
 	Updated_at string
-	Book       []Bukus `gorm:"foreignKey:Sumber_Buku"`
+	Book       []Books `gorm:"foreignKey:Sumber_Buku"`
 }
 
 type AksesUsers struct {
