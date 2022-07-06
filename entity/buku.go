@@ -1,30 +1,31 @@
 package entity
 
 import (
-	"fmt"
 	"log"
+	"time"
 
 	"gorm.io/gorm"
 )
 
-type Buku struct {
-	gorm.Model
+type Books struct {
+	ID_Buku      int `gorm:"primaryKey"`
 	Judul_Buku   string
 	Penulis      string
 	Penerbit     string
 	Tahun_terbit string
 	Sumber_Buku  int
-	Created_at   string
-	Updated_at   string
+	Created_at   time.Time `gorm:"autoCreateTime"`
+	Updated_at   time.Time `gorm:"autoCreateTime"`
+	// Rent         []Rent `gorm:"many2many:books_Rent;"`
 }
 
 type AksesBuku struct {
 	DB *gorm.DB
 }
 
-func (ab *AksesBuku) GetAllData() []Buku {
-	var daftarBuku = []Buku{}
-	// err := as.DB.Raw("Select * from buku").Scan(&daftarBuku)
+func (ab *AksesBuku) GetAllData() []Books {
+	var daftarBuku = []Books{}
+	// err := as.DB.Raw("Select * from books").Scan(&daftarBuku)
 	err := ab.DB.Find(&daftarBuku)
 	if err.Error != nil {
 		log.Fatal(err.Statement.SQL.String())
@@ -33,29 +34,27 @@ func (ab *AksesBuku) GetAllData() []Buku {
 	return daftarBuku
 }
 
-func (ab *AksesBuku) AddBuku(newBuku []Buku) []Buku {
-	var tambahbuku = []Buku{}
-	fmt.Print("Masukkan Judul Buku: ")
-	fmt.Scanln(&newBuku.Judul_Buku)
-	fmt.Print("Masukkan Penulis: ")
-	fmt.Scanln(&newBuku.Penulis)
-	fmt.Print("Masukkan Penerbit: ")
-	fmt.Scanln(&newBuku.Penerbit)
-	fmt.Print("Masukkan Tahun Penerbit: ")
-	fmt.Scanln(&newBuku.Tahun_terbit)
-	fmt.Print("Masukkan Sumber Buku: ")
-	fmt.Scanln(&newBuku.Sumber_Buku)
+func (ab *AksesBuku) AddBuku(newBuku Books) Books {
 	err := ab.DB.Create(&newBuku).Error
 	if err != nil {
 		log.Fatal(err)
-		return tambahbuku
+		return Books{}
 	}
 	return newBuku
 }
 
+// func (au *AksesUsers) TambahUser(newUsers Users) Users {
+// 	err := au.DB.Create(&newUsers).Error
+// 	if err != nil {
+// 		log.Fatal(err)
+// 		return Users{}
+// 	}
+// 	return newUsers
+// }
+
 func (ab *AksesBuku) HapusBuku(IDBuku int) bool {
 	// tmp := Buku{ID: IDBuku}
-	postExc := ab.DB.Where("ID = ?", IDBuku).Delete(&Buku{})
+	postExc := ab.DB.Where("ID = ?", IDBuku).Delete(&Books{})
 	// err := as.DB.Delete(&tmp)
 	//cek apakah postexc ada isinya ?
 	if err := postExc.Error; err != nil {

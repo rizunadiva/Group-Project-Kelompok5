@@ -10,9 +10,13 @@ func main() {
 	conn := config.InitDB()
 	config.MigrateDB(conn)
 	aksesUser := _entity.AksesUsers{DB: conn}
-	// aksesBuku := _entity.AksesBuku{DB: conn}
+	aksesBuku := _entity.AksesBuku{DB: conn}
+	aksesRent := _entity.AksesRent{DB: conn}
 	var input int = 0
 	var newUsers _entity.Users
+	var newBuku _entity.Books
+	var Rental _entity.Rent
+	// var viewProfile _entity.Users
 	for input != 99 {
 		fmt.Println("=============================================================")
 		fmt.Println("|SELAMAT DATANG DI PERPUSTAKAAN UNIVERSITAS LANGSUNG SARJANA|")
@@ -20,7 +24,7 @@ func main() {
 		fmt.Println("1. Login")
 		fmt.Println("2. Register")
 		fmt.Println("3. Lihat Daftar Buku")
-		fmt.Println("0. Kembali")
+		fmt.Println("99. Kembali")
 		fmt.Println("Masukkan Pilihan menu: ")
 		fmt.Scanln(&input)
 		switch input {
@@ -40,10 +44,52 @@ func main() {
 				fmt.Scanln(&input2)
 				switch input2 {
 				case 1:
+					fmt.Println("Profil Anda")
+					// for _, val := range aksesUser.LihatProfile(viewProfile) {
+					// fmt.Println(val)
+				// }
 				case 2:
+					fmt.Println("ok")
 				case 3:
+					fmt.Println("ok")
 				case 4:
+					fmt.Print("Masukkan Judul Buku: ")
+					fmt.Scanln(&newBuku.Judul_Buku)
+					fmt.Print("Masukkan Penulis: ")
+					fmt.Scanln(&newBuku.Penulis)
+					fmt.Print("Masukkan Penerbit: ")
+					fmt.Scanln(&newBuku.Penerbit)
+					fmt.Print("Masukkan Tahun Penerbit: ")
+					fmt.Scanln(&newBuku.Tahun_terbit)
+					fmt.Print("Masukkan ID anda: ")
+					fmt.Scanln(&newBuku.Sumber_Buku)
 
+					resultBook := aksesBuku.AddBuku(newBuku)
+					if resultBook.ID_Buku == 0 {
+						fmt.Println("Tidak bisa tambah buku")
+						break
+					}
+					fmt.Println("Berhasil Input User")
+				case 5:
+					fmt.Print("Masukkan ID anda: ")
+					fmt.Scanln(&Rental.ID_Penyewa)
+					fmt.Print("Masukkan ID buku: ")
+					fmt.Scanln(&Rental.ID_Buku)
+
+					resultSewa := aksesRent.SewaBuku(Rental)
+					if resultSewa.ID_Rent == 0 {
+						fmt.Println("Tidak bisa sewa buku")
+						break
+					}
+					fmt.Println("Berhasil Sewa")
+				case 6:
+					fmt.Println("ok")
+				case 7:
+					fmt.Println("ok")
+				case 8:
+					fmt.Println("ok")
+				case 9:
+					fmt.Println("ok")
 				}
 			}
 
@@ -57,18 +103,18 @@ func main() {
 			fmt.Scanln(&newUsers.Password)
 
 			result := aksesUser.TambahUser(newUsers)
-			if result.ID == 0 {
+			if result.ID_User == 0 {
 				fmt.Println("Tidak bisa input user")
-				break
+				// break
 			}
 			fmt.Println("Berhasil input user")
 		case 3:
-			AksesBuku := _entity.AksesBuku{DB: conn}
-			for _, val := range AksesBuku.GetAllData() {
+			// fmt.Println("ok")
+			fmt.Println("Berikut adalah daftar seluruh buku")
+			// rescase3 := aksesBuku.GetAllData(daftarBuku)
+			for _, val := range aksesBuku.GetAllData() {
 				fmt.Println(val)
 			}
-		default:
-			continue
 		}
 	}
 	fmt.Println("Terima Kasih")

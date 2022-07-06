@@ -27,4 +27,6 @@ func InitDB() *gorm.DB {
 
 func MigrateDB(conn *gorm.DB) {
 	conn.AutoMigrate(entity.Users{})
+	conn.AutoMigrate(entity.Books{})
+	conn.AutoMigrate(entity.Rent{})
 }
