@@ -34,29 +34,41 @@ func (au *AksesUsers) TambahUser(newUsers Users) Users {
 	return newUsers
 }
 
-func (au *AksesUsers) LoginUser(newUsers Users) (result bool, err error) {
+func (au *AksesUsers) LoginUser(newUsers Users) (result bool, id uint, err error) {
 	// newUsers := Users{}
-	var Username, Password string
+	// var Username, Password string
 	fmt.Println("Silahkan Masukkan Username dan Password Anda")
 	fmt.Print("Username: ")
 	fmt.Scanln(&newUsers.Username)
 	fmt.Print("Password: ")
 	fmt.Scanln(&newUsers.Password)
-	// var daftarUser = []Users{}
-	result_ := au.DB.Where("Username = ? AND Password = ?", Username, Password).Find(&newUsers)
+	result_ := au.DB.Where("Username = ? AND Password = ?", newUsers.Username, newUsers.Password).First(&newUsers)
 	// err := ab.DB.Find(&daftarBuku)
+	// fmt.Println(newUsers.ID_User)
 	if result_.Error != nil {
 		log.Fatal(result_.Statement.SQL.String())
-		return false, nil
+		return false, 0, nil
 	}
-	return true, nil
+	return true, uint(newUsers.ID_User), nil
 }
 
-func (au *AksesUsers) LihatProfile(viewProfile []Users) []Users {
-	err := au.DB.Find(&viewProfile)
+func (au *AksesUsers) LihatProfile(viewProfile Users) Users {
+	err := au.DB.Select("ID_User", "Nama", "Username", "Password").Find(&viewProfile)
+	// Where("ID_User = ?, Nama = ?, Username = ?, Password = ?").Scan(&viewProfile)
 	if err.Error != nil {
 		log.Fatal(err.Statement.SQL.String())
-		return nil
+		return Users{}
 	}
 	return viewProfile
+}
+func (au *AksesUsers) EditProfile(id_user uint, EditProfile Users) Users {
+	// var ID_User string
+	// fmt.Println(ID_User)
+	err := au.DB.Where("id_user = ?", id_user).Updates(&EditProfile)
+	// Where("ID_User = ?, Nama = ?, Username = ?, Password = ?").Scan(&viewProfile)
+	if err.Error != nil {
+		log.Fatal(err.Statement.SQL.String())
+		return Users{}
+	}
+	return EditProfile
 }

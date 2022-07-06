@@ -16,6 +16,9 @@ func main() {
 	var newUsers _entity.Users
 	var newBuku _entity.Books
 	var Rental _entity.Rent
+	var viewProfile _entity.Users
+	var EditProfile _entity.Users
+	var idUserGlobal uint
 	// var viewProfile _entity.Users
 	for input != 99 {
 		fmt.Println("=============================================================")
@@ -30,10 +33,11 @@ func main() {
 		switch input {
 		case 1:
 			// AksesLogin := _entity.AksesLogin{DB: conn}
-			result, err := aksesUser.LoginUser(newUsers)
+			result, idLogin, err := aksesUser.LoginUser(newUsers)
 			if err != nil {
 				fmt.Println("Login Gagal, username tidak terdaftar")
 			}
+			idUserGlobal = idLogin
 			if result {
 				var input2 int
 				fmt.Println("\n=Login /berhasil=")
@@ -44,12 +48,24 @@ func main() {
 				fmt.Scanln(&input2)
 				switch input2 {
 				case 1:
+					result1 := aksesUser.LihatProfile(viewProfile)
 					fmt.Println("Profil Anda")
-					// for _, val := range aksesUser.LihatProfile(viewProfile) {
-					// fmt.Println(val)
-				// }
+					fmt.Println("ID: ", result1.ID_User)
+					fmt.Println("Nama: ", result1.Nama)
+					fmt.Println("Username: ", result1.Username)
+					fmt.Println("Password: ", result1.Password)
 				case 2:
 					fmt.Println("ok")
+					fmt.Println("Masukkan Nama Baru: ")
+					fmt.Scanln(&EditProfile.Nama)
+					fmt.Println("Masukkan Username Baru: ")
+					fmt.Scanln(&EditProfile.Username)
+					fmt.Println("Masukkan Password: ")
+					fmt.Scanln(&EditProfile.Password)
+
+					result2 := aksesUser.EditProfile(idUserGlobal, EditProfile)
+					fmt.Print("Nama Baru", result2.Nama)
+
 				case 3:
 					fmt.Println("ok")
 				case 4:
