@@ -55,7 +55,7 @@ func main() {
 				case 4:
 					fmt.Print("Masukkan Judul Buku: ")
 					fmt.Scanln(&newBuku.Judul_Buku)
-					fmt.Print("Masukkan Penulis: ")
+					fmt.Println("Masukkan Penulis: ")
 					fmt.Scanln(&newBuku.Penulis)
 					fmt.Print("Masukkan Penerbit: ")
 					fmt.Scanln(&newBuku.Penerbit)
@@ -85,9 +85,15 @@ func main() {
 				case 6:
 					fmt.Println("ok")
 				case 7:
-					fmt.Println("ok")
+					var ID_Buku int
+					fmt.Print("Masukkan ID Buku yang akan dihapus: ")
+					fmt.Scanln(&ID_Buku)
+					fmt.Println(aksesBuku.HapusBuku(ID_Buku))
 				case 8:
-					fmt.Println("ok")
+					var ID_Rent int
+					fmt.Print("Masukkan ID Sewa yang akan dikembalikan: ")
+					fmt.Scanln(&ID_Rent)
+					fmt.Println(aksesRent.ReturnBuku(ID_Rent))
 				case 9:
 					fmt.Println("ok")
 				}

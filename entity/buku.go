@@ -16,7 +16,7 @@ type Books struct {
 	Sumber_Buku  int
 	Created_at   time.Time `gorm:"autoCreateTime"`
 	Updated_at   time.Time `gorm:"autoCreateTime"`
-	// Rent         []Rent `gorm:"many2many:books_Rent;"`
+	Rent         []Rent    `gorm:"foreignKey:ID_Buku"`
 }
 
 type AksesBuku struct {
@@ -43,32 +43,16 @@ func (ab *AksesBuku) AddBuku(newBuku Books) Books {
 	return newBuku
 }
 
-// func (au *AksesUsers) TambahUser(newUsers Users) Users {
-// 	err := au.DB.Create(&newUsers).Error
-// 	if err != nil {
-// 		log.Fatal(err)
-// 		return Users{}
-// 	}
-// 	return newUsers
-// }
-
-func (ab *AksesBuku) HapusBuku(IDBuku int) bool {
-	// tmp := Buku{ID: IDBuku}
-	postExc := ab.DB.Where("ID = ?", IDBuku).Delete(&Books{})
-	// err := as.DB.Delete(&tmp)
-	//cek apakah postexc ada isinya ?
+func (ab *AksesBuku) HapusBuku(ID_Buku int) bool {
+	postExc := ab.DB.Where("ID_Buku = ?", ID_Buku).Delete(&Books{})
 	if err := postExc.Error; err != nil {
 		log.Fatal(err)
 		return false
 	}
-	// berapa data yang berubah ?
 	if aff := postExc.RowsAffected; aff < 1 {
 		log.Println("Tidak ada data yang dihapus")
 		return false
 	}
+	log.Println("Berhasil hapus buku")
 	return true
 }
-
-// func MigrateDB(conn *gorm.DB) {
-// 	conn.AutoMigrate([]Buku)
-// }
