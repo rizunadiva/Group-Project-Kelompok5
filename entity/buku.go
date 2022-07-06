@@ -2,19 +2,21 @@ package entity
 
 import (
 	"log"
+	"time"
 
 	"gorm.io/gorm"
 )
 
 type Books struct {
-	gorm.Model
+	ID_Buku      int `gorm:"primaryKey"`
 	Judul_Buku   string
 	Penulis      string
 	Penerbit     string
 	Tahun_terbit string
 	Sumber_Buku  int
-	Created_at   string
-	Updated_at   string
+	Created_at   time.Time `gorm:"autoCreateTime"`
+	Updated_at   time.Time `gorm:"autoCreateTime"`
+	// Rent         []Rent `gorm:"many2many:books_Rent;"`
 }
 
 type AksesBuku struct {

@@ -11,9 +11,12 @@ func main() {
 	config.MigrateDB(conn)
 	aksesUser := _entity.AksesUsers{DB: conn}
 	aksesBuku := _entity.AksesBuku{DB: conn}
+	aksesRent := _entity.AksesRent{DB: conn}
 	var input int = 0
 	var newUsers _entity.Users
 	var newBuku _entity.Books
+	var Rental _entity.Rent
+	// var viewProfile _entity.Users
 	for input != 99 {
 		fmt.Println("=============================================================")
 		fmt.Println("|SELAMAT DATANG DI PERPUSTAKAAN UNIVERSITAS LANGSUNG SARJANA|")
@@ -41,7 +44,10 @@ func main() {
 				fmt.Scanln(&input2)
 				switch input2 {
 				case 1:
-					fmt.Println("ok")
+					fmt.Println("Profil Anda")
+					// for _, val := range aksesUser.LihatProfile(viewProfile) {
+					// fmt.Println(val)
+				// }
 				case 2:
 					fmt.Println("ok")
 				case 3:
@@ -59,13 +65,23 @@ func main() {
 					fmt.Scanln(&newBuku.Sumber_Buku)
 
 					resultBook := aksesBuku.AddBuku(newBuku)
-					if resultBook.ID == 0 {
+					if resultBook.ID_Buku == 0 {
 						fmt.Println("Tidak bisa tambah buku")
 						break
 					}
 					fmt.Println("Berhasil Input User")
 				case 5:
-					fmt.Println("ok")
+					fmt.Print("Masukkan ID anda: ")
+					fmt.Scanln(&Rental.ID_Penyewa)
+					fmt.Print("Masukkan ID buku: ")
+					fmt.Scanln(&Rental.ID_Buku)
+
+					resultSewa := aksesRent.SewaBuku(Rental)
+					if resultSewa.ID_Rent == 0 {
+						fmt.Println("Tidak bisa sewa buku")
+						break
+					}
+					fmt.Println("Berhasil Sewa")
 				case 6:
 					fmt.Println("ok")
 				case 7:
@@ -87,18 +103,18 @@ func main() {
 			fmt.Scanln(&newUsers.Password)
 
 			result := aksesUser.TambahUser(newUsers)
-			if result.ID == 0 {
+			if result.ID_User == 0 {
 				fmt.Println("Tidak bisa input user")
 				// break
 			}
 			fmt.Println("Berhasil input user")
 		case 3:
-			fmt.Println("ok")
-			// 	fmt.Println("Berikut adalah daftar seluruh buku")
-			// 	// rescase3 := aksesBuku.GetAllData(daftarBuku)
-			// 	for _, val := range aksesBuku.GetAllData() {
-			// 		fmt.Println(val)
-			// 	}
+			// fmt.Println("ok")
+			fmt.Println("Berikut adalah daftar seluruh buku")
+			// rescase3 := aksesBuku.GetAllData(daftarBuku)
+			for _, val := range aksesBuku.GetAllData() {
+				fmt.Println(val)
+			}
 		}
 	}
 	fmt.Println("Terima Kasih")

@@ -3,19 +3,21 @@ package entity
 import (
 	"fmt"
 	"log"
+	"time"
 
 	"gorm.io/gorm"
 	// "github.com/google/uuid"
 )
 
 type Users struct {
-	gorm.Model
+	ID_User    int `gorm:"primaryKey"`
 	Nama       string
 	Username   string
 	Password   string
-	Created_at string
-	Updated_at string
-	Book       []Books `gorm:"foreignKey:Sumber_Buku"`
+	Created_at time.Time `gorm:"autoCreateTime"`
+	Updated_at time.Time `gorm:"autoCreateTime"`
+	Book       []Books   `gorm:"foreignKey:Sumber_Buku"`
+	// Rent       []Rent  `gorm:"many2many:users_Rent;"`
 }
 
 type AksesUsers struct {
@@ -47,4 +49,13 @@ func (au *AksesUsers) LoginUser(newUsers Users) (result bool, err error) {
 		return false, nil
 	}
 	return true, nil
+}
+
+func (au *AksesUsers) LihatProfile(viewProfile []Users) []Users {
+	err := au.DB.Find(&viewProfile)
+	if err.Error != nil {
+		log.Fatal(err.Statement.SQL.String())
+		return nil
+	}
+	return viewProfile
 }
