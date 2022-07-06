@@ -16,6 +16,7 @@ type Users struct {
 	Password   string
 	Created_at time.Time `gorm:"autoCreateTime"`
 	Updated_at time.Time `gorm:"autoCreateTime"`
+	Rent       []Rent    `gorm:"foreignKey:ID_Penyewa"`
 	Book       []Books   `gorm:"foreignKey:Sumber_Buku"`
 	// Rent       []Rent  `gorm:"many2many:users_Rent;"`
 }
