@@ -19,6 +19,10 @@ func main() {
 	var viewProfile _entity.Users
 	var EditProfile _entity.Users
 	var idUserGlobal uint
+	var editBuku _entity.Books
+	// var UpdateBuku _entity.Books
+	// var confirmDelete _entity.Users
+	var DeleteUser _entity.Users
 	// var viewProfile _entity.Users
 	for input != 99 {
 		fmt.Println("=============================================================")
@@ -48,14 +52,13 @@ func main() {
 				fmt.Scanln(&input2)
 				switch input2 {
 				case 1:
-					result1 := aksesUser.LihatProfile(viewProfile)
+					result1 := aksesUser.LihatProfile(idUserGlobal, viewProfile)
 					fmt.Println("Profil Anda")
 					fmt.Println("ID: ", result1.ID_User)
 					fmt.Println("Nama: ", result1.Nama)
 					fmt.Println("Username: ", result1.Username)
 					fmt.Println("Password: ", result1.Password)
 				case 2:
-					fmt.Println("ok")
 					fmt.Println("Masukkan Nama Baru: ")
 					fmt.Scanln(&EditProfile.Nama)
 					fmt.Println("Masukkan Username Baru: ")
@@ -64,10 +67,23 @@ func main() {
 					fmt.Scanln(&EditProfile.Password)
 
 					result2 := aksesUser.EditProfile(idUserGlobal, EditProfile)
-					fmt.Print("Nama Baru", result2.Nama)
+					fmt.Println("Nama Baru", result2.Nama)
+					fmt.Println("Username Baru", result2.Username)
+					fmt.Println("Password Baru", result2.Password)
 
 				case 3:
-					fmt.Println("ok")
+					var confirmDel int
+					fmt.Println("Anda yakin akan menghapus akun?")
+					fmt.Println("1. Ya")
+					fmt.Println("2. Tidak")
+					fmt.Scanln(&confirmDel)
+					switch confirmDel {
+					case 1:
+						// fmt.Scanln(&confirmDelete.ID_User)
+						result3 := aksesUser.HapusProfile(idUserGlobal, DeleteUser)
+						fmt.Print(result3)
+					}
+
 				case 4:
 					fmt.Print("Masukkan Judul Buku: ")
 					fmt.Scanln(&newBuku.Judul_Buku)
@@ -99,7 +115,28 @@ func main() {
 					}
 					fmt.Println("Berhasil Sewa")
 				case 6:
+					var id_book int
 					fmt.Println("ok")
+					fmt.Print("Masukkan ID Buku yang akan diedit: ")
+					fmt.Scanln(&id_book)
+					fmt.Println("Masukkan Nama Judul Buku Baru: ")
+					fmt.Scanln(&editBuku.Judul_Buku)
+					fmt.Println("Masukkan Nama Penulis Baru: ")
+					fmt.Scanln(&editBuku.Penulis)
+					fmt.Println("Masukkan Nama Penerbit Baru: ")
+					fmt.Scanln(&editBuku.Penerbit)
+					fmt.Println("Masukkan Tahun Terbit Baru: ")
+					fmt.Scanln(&editBuku.Tahun_terbit)
+					fmt.Println("Masukkan ID Anda: ")
+					fmt.Scanln(&editBuku.Sumber_Buku)
+
+					result6 := aksesBuku.EditBuku(id_book, editBuku)
+					fmt.Println("Judul Buku Baru", result6.Judul_Buku)
+					fmt.Println("Penulis Buku Baru", result6.Penulis)
+					fmt.Println("Penulis Buku Baru", result6.Penulis)
+					fmt.Println("Penerbit Buku Baru", result6.Penerbit)
+					fmt.Println("Tahun Terbit Baru", result6.Tahun_terbit)
+
 				case 7:
 					var ID_Buku int
 					fmt.Print("Masukkan ID Buku yang akan dihapus: ")
