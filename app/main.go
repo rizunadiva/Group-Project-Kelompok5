@@ -25,9 +25,9 @@ func main() {
 	var DeleteUser _entity.Users
 	// var viewProfile _entity.Users
 	for input != 99 {
-		fmt.Println("=============================================================")
-		fmt.Println("|SELAMAT DATANG DI PERPUSTAKAAN UNIVERSITAS LANGSUNG SARJANA|")
-		fmt.Println("=============================================================")
+		fmt.Println("=================================")
+		fmt.Println("|SELAMAT DATANG DI APP RENT BOOK|")
+		fmt.Println("=================================")
 		fmt.Println("1. Login")
 		fmt.Println("2. Register")
 		fmt.Println("3. Lihat Daftar Buku")
