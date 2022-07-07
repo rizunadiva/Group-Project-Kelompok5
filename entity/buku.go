@@ -56,11 +56,11 @@ func (ab *AksesBuku) HapusBuku(ID_Buku int) bool {
 	log.Println("Berhasil hapus buku")
 	return true
 }
-func (ab *AksesBuku) EditBuku(id_buku int) Books {
-	err := ab.DB.Where("id_buku = ?", id_buku).Updates(&id_buku)
+func (ab *AksesBuku) EditBuku(id_book int, UpdateBuku Books) Books {
+	err := ab.DB.Where("id_buku = ?", id_book).Updates(&UpdateBuku)
 	if err.Error != nil {
 		log.Fatal(err.Statement.SQL.String())
 		return Books{}
 	}
-	return Books{}
+	return UpdateBuku
 }
