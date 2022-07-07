@@ -20,9 +20,11 @@ func main() {
 	var EditProfile _entity.Users
 	var idUserGlobal uint
 	var editBuku _entity.Books
+	var daftarBukuSaya _entity.Rent
 	// var UpdateBuku _entity.Books
 	// var confirmDelete _entity.Users
 	var DeleteUser _entity.Users
+	// var rent _entity.Rent
 	// var viewProfile _entity.Users
 	for input != 99 {
 		fmt.Println("=================================")
@@ -87,7 +89,7 @@ func main() {
 				case 4:
 					fmt.Print("Masukkan Judul Buku: ")
 					fmt.Scanln(&newBuku.Judul_Buku)
-					fmt.Println("Masukkan Penulis: ")
+					fmt.Print("Masukkan Penulis: ")
 					fmt.Scanln(&newBuku.Penulis)
 					fmt.Print("Masukkan Penerbit: ")
 					fmt.Scanln(&newBuku.Penerbit)
@@ -149,6 +151,7 @@ func main() {
 					fmt.Println(aksesRent.ReturnBuku(ID_Rent))
 				case 9:
 					fmt.Println("ok")
+					fmt.Println(aksesUser.MyBooks(idUserGlobal, daftarBukuSaya))
 				}
 			}
 

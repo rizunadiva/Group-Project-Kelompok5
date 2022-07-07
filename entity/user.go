@@ -84,11 +84,24 @@ func (au *AksesUsers) HapusProfile(id_user uint, DeleteUser Users) Users {
 }
 
 // var Books _entity.Books
-func (au *AksesUsers) daftarBukuSaya(id_user uint, rent []Rent, book []Books) []Rent {
-	err := au.DB.Select("id_penyewa", "id_buku").First(&rent, "id_user = ?", id_user)
+// func (au *AksesUsers) daftarBukuSaya(id_user uint, rent []Rent, book []Books) []Rent {
+// 	err := au.DB.Select("id_penyewa", "id_buku").First(&rent, "id_user = ?", id_user)
+// 	if err.Error != nil {
+// 		log.Fatal(err.Statement.SQL.String())
+// 		return nil
+// 	}
+// 	return rent
+// }
+func (au *AksesUsers) MyBooks(id_user uint, daftarBukuSaya Rent) Rent {
+	var rent []Rent
+	var id_penyewa = id_user
+	err := au.DB.Find(&daftarBukuSaya).First(&rent, "id_penyewa = ?", id_penyewa)
+	// err := au.DB.Joins("books").Find(&daftarBukuSaya)
 	if err.Error != nil {
 		log.Fatal(err.Statement.SQL.String())
-		return nil
+		return Rent{}
 	}
-	return rent
+	return daftarBukuSaya
 }
+
+// func (au *AksesUsers) coba() {}
