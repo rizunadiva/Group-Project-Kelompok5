@@ -52,8 +52,8 @@ func (au *AksesUsers) LoginUser(newUsers Users) (result bool, id uint, err error
 	return true, uint(newUsers.ID_User), nil
 }
 
-func (au *AksesUsers) LihatProfile(viewProfile Users) Users {
-	err := au.DB.Select("ID_User", "Nama", "Username", "Password").Find(&viewProfile)
+func (au *AksesUsers) LihatProfile(id_user uint, viewProfile Users) Users {
+	err := au.DB.Select("id_user", "nama", "username", "password").First(&viewProfile, "id_user = ?", id_user)
 	// Where("ID_User = ?, Nama = ?, Username = ?, Password = ?").Scan(&viewProfile)
 	if err.Error != nil {
 		log.Fatal(err.Statement.SQL.String())
@@ -71,4 +71,14 @@ func (au *AksesUsers) EditProfile(id_user uint, EditProfile Users) Users {
 		return Users{}
 	}
 	return EditProfile
+}
+
+func (au *AksesUsers) HapusProfile(id_user uint, DeleteUser Users) Users {
+	err := au.DB.Where("id_user = ?", id_user).Delete(&DeleteUser)
+	if err.Error != nil {
+		log.Fatal(err.Statement.SQL.String())
+		return Users{}
+	}
+	log.Println("Berhasil hapus akun")
+	return DeleteUser
 }

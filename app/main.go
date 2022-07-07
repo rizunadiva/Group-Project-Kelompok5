@@ -19,6 +19,9 @@ func main() {
 	var viewProfile _entity.Users
 	var EditProfile _entity.Users
 	var idUserGlobal uint
+	// var UpdateBuku _entity.Books
+	// var confirmDelete _entity.Users
+	var DeleteUser _entity.Users
 	// var viewProfile _entity.Users
 	for input != 99 {
 		fmt.Println("=============================================================")
@@ -48,14 +51,13 @@ func main() {
 				fmt.Scanln(&input2)
 				switch input2 {
 				case 1:
-					result1 := aksesUser.LihatProfile(viewProfile)
+					result1 := aksesUser.LihatProfile(idUserGlobal, viewProfile)
 					fmt.Println("Profil Anda")
 					fmt.Println("ID: ", result1.ID_User)
 					fmt.Println("Nama: ", result1.Nama)
 					fmt.Println("Username: ", result1.Username)
 					fmt.Println("Password: ", result1.Password)
 				case 2:
-					fmt.Println("ok")
 					fmt.Println("Masukkan Nama Baru: ")
 					fmt.Scanln(&EditProfile.Nama)
 					fmt.Println("Masukkan Username Baru: ")
@@ -67,7 +69,18 @@ func main() {
 					fmt.Print("Nama Baru", result2.Nama)
 
 				case 3:
-					fmt.Println("ok")
+					var confirmDel int
+					fmt.Println("Anda yakin akan menghapus akun?")
+					fmt.Println("1. Ya")
+					fmt.Println("2. Tidak")
+					fmt.Scanln(&confirmDel)
+					switch confirmDel {
+					case 1:
+						// fmt.Scanln(&confirmDelete.ID_User)
+						result3 := aksesUser.HapusProfile(idUserGlobal, DeleteUser)
+						fmt.Print(result3)
+					}
+
 				case 4:
 					fmt.Print("Masukkan Judul Buku: ")
 					fmt.Scanln(&newBuku.Judul_Buku)
@@ -99,7 +112,12 @@ func main() {
 					}
 					fmt.Println("Berhasil Sewa")
 				case 6:
+					var id_buku int
 					fmt.Println("ok")
+					fmt.Print("Masukkan ID Buku yang akan diedit: ")
+					fmt.Scanln(&id_buku)
+					fmt.Println(aksesBuku.EditBuku(id_buku))
+
 				case 7:
 					var ID_Buku int
 					fmt.Print("Masukkan ID Buku yang akan dihapus: ")
