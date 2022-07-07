@@ -64,3 +64,14 @@ func (ab *AksesBuku) EditBuku(id_book int, UpdateBuku Books) Books {
 	}
 	return UpdateBuku
 }
+
+func (ab *AksesBuku) GetMYData(id_user uint) []Books {
+	var daftarBuku = []Books{}
+	// err := as.DB.Raw("Select * from books").Scan(&daftarBuku)
+	err := ab.DB.Where("Sumber_Buku =?", id_user).Find(&daftarBuku)
+	if err.Error != nil {
+		log.Fatal(err.Statement.SQL.String())
+		return nil
+	}
+	return daftarBuku
+}

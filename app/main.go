@@ -153,8 +153,22 @@ func main() {
 					fmt.Scanln(&ID_Rent)
 					fmt.Println(aksesRent.ReturnBuku(ID_Rent))
 				case 9:
+					var input int
 					// fmt.Println("ok")
-					fmt.Println(aksesUser.MyBooks(idUserGlobal))
+					// fmt.Println(aksesUser.MyBooks(idUserGlobal))
+					fmt.Println("1. Daftar Buku Sewa")
+					fmt.Println("2. Daftar Buku Saya")
+					fmt.Scanln(&input)
+					switch input {
+					case 1:
+						fmt.Println("Berikut Adalah Daftar Buku Sewa :")
+						fmt.Println("ok")
+						fmt.Println(aksesUser.MyBooks(idUserGlobal))
+
+					case 2:
+						fmt.Println("Berikut Adalah Daftar Buku Saya")
+						fmt.Println(aksesBuku.GetMYData(idUserGlobal))
+					}
 				}
 			}
 
