@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"gorm.io/gorm"
-	// "github.com/google/uuid"
 )
 
 type Users struct {
@@ -18,7 +17,6 @@ type Users struct {
 	Updated_at time.Time `gorm:"autoCreateTime"`
 	Rent       []Rent    `gorm:"foreignKey:ID_Penyewa"`
 	Book       []Books   `gorm:"foreignKey:Sumber_Buku"`
-	// Rent       []Rent  `gorm:"many2many:users_Rent;"`
 }
 
 type AksesUsers struct {
@@ -35,16 +33,13 @@ func (au *AksesUsers) TambahUser(newUsers Users) Users {
 }
 
 func (au *AksesUsers) LoginUser(newUsers Users) (result bool, id uint, err error) {
-	// newUsers := Users{}
-	// var Username, Password string
+
 	fmt.Println("Silahkan Masukkan Username dan Password Anda")
 	fmt.Print("Username: ")
 	fmt.Scanln(&newUsers.Username)
 	fmt.Print("Password: ")
 	fmt.Scanln(&newUsers.Password)
 	result_ := au.DB.Where("Username = ? AND Password = ?", newUsers.Username, newUsers.Password).First(&newUsers)
-	// err := ab.DB.Find(&daftarBuku)
-	// fmt.Println(newUsers.ID_User)
 	if result_.Error != nil {
 		log.Fatal(result_.Statement.SQL.String())
 		return false, 0, nil
