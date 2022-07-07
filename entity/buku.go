@@ -1,6 +1,7 @@
 package entity
 
 import (
+	"fmt"
 	"log"
 	"time"
 
@@ -52,6 +53,7 @@ func (ab *AksesBuku) HapusBuku(ID_Buku int) bool {
 		log.Println("Tidak ada data yang dihapus")
 		return false
 	}
+	fmt.Println("====================")
 	log.Println("Berhasil hapus buku")
 	return true
 }

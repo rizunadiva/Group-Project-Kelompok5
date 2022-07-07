@@ -1,6 +1,7 @@
 package entity
 
 import (
+	"fmt"
 	"log"
 	"time"
 
@@ -37,6 +38,7 @@ func (ar *AksesRent) ReturnBuku(ID_Rent int) bool {
 		log.Println("Tidak bisa return")
 		return false
 	}
-	log.Println("Return Berhasil")
+	fmt.Println("=============================")
+	log.Println("Buku Berhasil Dikembalikan !!")
 	return true
 }

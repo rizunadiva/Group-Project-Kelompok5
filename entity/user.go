@@ -33,7 +33,7 @@ func (au *AksesUsers) TambahUser(newUsers Users) Users {
 }
 
 func (au *AksesUsers) LoginUser(newUsers Users) (result bool, id uint, err error) {
-
+	fmt.Println("============================================")
 	fmt.Println("Silahkan Masukkan Username dan Password Anda")
 	fmt.Print("Username: ")
 	fmt.Scanln(&newUsers.Username)
