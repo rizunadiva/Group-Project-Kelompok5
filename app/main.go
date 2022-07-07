@@ -16,18 +16,20 @@ func main() {
 	var newUsers _entity.Users
 	var newBuku _entity.Books
 	var Rental _entity.Rent
-	var viewProfile _entity.Users
+	// var viewProfile _entity.Users
 	var EditProfile _entity.Users
 	var idUserGlobal uint
 	var editBuku _entity.Books
+	// var daftarBukuSaya _entity.Rent
 	// var UpdateBuku _entity.Books
 	// var confirmDelete _entity.Users
 	var DeleteUser _entity.Users
+	// var rent _entity.Rent
 	// var viewProfile _entity.Users
 	for input != 99 {
-		fmt.Println("=============================================================")
-		fmt.Println("|SELAMAT DATANG DI PERPUSTAKAAN UNIVERSITAS LANGSUNG SARJANA|")
-		fmt.Println("=============================================================")
+		fmt.Println("=================================")
+		fmt.Println("|SELAMAT DATANG DI APP RENT BOOK|")
+		fmt.Println("=================================")
 		fmt.Println("1. Login")
 		fmt.Println("2. Register")
 		fmt.Println("3. Lihat Daftar Buku")
@@ -42,17 +44,20 @@ func main() {
 				fmt.Println("Login Gagal, username tidak terdaftar")
 			}
 			idUserGlobal = idLogin
-			if result {
+			for result {
 				var input2 int
 				fmt.Println("\n=Login /berhasil=")
 				fmt.Println("\n=================")
 				fmt.Println("Selamat Datang\nPilih menu dibawah ini")
-				fmt.Println("1. Lihat Profil\n2. Edit Profil\n3. Hapus Profil\n4. Tambah Buku\n5. Sewa Buku\n6. Edit Buku\n7. Hapus Buku\n8. Kembalikan Buku\n9. Buku Saya")
+				fmt.Println("1. Lihat Profil\n2. Edit Profil\n3. Hapus Profil\n4. Tambah Buku\n5. Sewa Buku\n6. Edit Buku\n7. Hapus Buku\n8. Kembalikan Buku\n9. Buku Saya\n100. keluar")
 				fmt.Print("Pilih Menu : ")
 				fmt.Scanln(&input2)
 				switch input2 {
+				case 100:
+					idUserGlobal = 0
+					result = false
 				case 1:
-					result1 := aksesUser.LihatProfile(idUserGlobal, viewProfile)
+					result1 := aksesUser.LihatProfile(idUserGlobal)
 					fmt.Println("Profil Anda")
 					fmt.Println("ID: ", result1.ID_User)
 					fmt.Println("Nama: ", result1.Nama)
@@ -70,7 +75,7 @@ func main() {
 					fmt.Println("Nama Baru", result2.Nama)
 					fmt.Println("Username Baru", result2.Username)
 					fmt.Println("Password Baru", result2.Password)
-
+					result = false
 				case 3:
 					var confirmDel int
 					fmt.Println("Anda yakin akan menghapus akun?")
@@ -87,7 +92,7 @@ func main() {
 				case 4:
 					fmt.Print("Masukkan Judul Buku: ")
 					fmt.Scanln(&newBuku.Judul_Buku)
-					fmt.Println("Masukkan Penulis: ")
+					fmt.Print("Masukkan Penulis: ")
 					fmt.Scanln(&newBuku.Penulis)
 					fmt.Print("Masukkan Penerbit: ")
 					fmt.Scanln(&newBuku.Penerbit)
@@ -148,7 +153,8 @@ func main() {
 					fmt.Scanln(&ID_Rent)
 					fmt.Println(aksesRent.ReturnBuku(ID_Rent))
 				case 9:
-					fmt.Println("ok")
+					// fmt.Println("ok")
+					fmt.Println(aksesUser.MyBooks(idUserGlobal))
 				}
 			}
 
