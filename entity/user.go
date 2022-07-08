@@ -50,7 +50,6 @@ func (au *AksesUsers) LoginUser(newUsers Users) (result bool, id uint, err error
 func (au *AksesUsers) LihatProfile(id_user uint) Users {
 	var viewProfile Users
 	err := au.DB.Select("id_user", "nama", "username", "password").First(&viewProfile, "id_user = ?", id_user)
-	// Where("ID_User = ?, Nama = ?, Username = ?, Password = ?").Scan(&viewProfile)
 	if err.Error != nil {
 		log.Fatal(err.Statement.SQL.String())
 		return Users{}
@@ -58,10 +57,7 @@ func (au *AksesUsers) LihatProfile(id_user uint) Users {
 	return viewProfile
 }
 func (au *AksesUsers) EditProfile(id_user uint, EditProfile Users) Users {
-	// var ID_User string
-	// fmt.Println(ID_User)
 	err := au.DB.Where("id_user = ?", id_user).Updates(&EditProfile)
-	// Where("ID_User = ?, Nama = ?, Username = ?, Password = ?").Scan(&viewProfile)
 	if err.Error != nil {
 		log.Fatal(err.Statement.SQL.String())
 		return Users{}
@@ -80,14 +76,9 @@ func (au *AksesUsers) HapusProfile(id_user uint, DeleteUser Users) Users {
 }
 
 func (au *AksesUsers) MyBooks(id_user uint) []Rent {
-	// var rent []Rent
-	// var id_penyewa int
 	var daftarBukuSaya []Rent
 	err := au.DB.Where("id_penyewa= ?", id_user).Find(&daftarBukuSaya)
 
-	// DB.Find(&daftarBukuSaya).First(&rent, "id_penyewa = ?", id_penyewa)
-	// select from
-	// err := au.DB.Joins("books").Find(&daftarBukuSaya)
 	if err.Error != nil {
 		log.Fatal(err.Statement.SQL.String())
 		return nil
