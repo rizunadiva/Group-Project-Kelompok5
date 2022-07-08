@@ -16,16 +16,10 @@ func main() {
 	var newUsers _entity.Users
 	var newBuku _entity.Books
 	var Rental _entity.Rent
-	// var viewProfile _entity.Users
 	var EditProfile _entity.Users
 	var idUserGlobal uint
 	var editBuku _entity.Books
-	// var daftarBukuSaya _entity.Rent
-	// var UpdateBuku _entity.Books
-	// var confirmDelete _entity.Users
 	var DeleteUser _entity.Users
-	// var rent _entity.Rent
-	// var viewProfile _entity.Users
 	for input != 99 {
 		fmt.Println("=================================")
 		fmt.Println("|SELAMAT DATANG DI APP RENT BOOK|")
@@ -38,7 +32,6 @@ func main() {
 		fmt.Scanln(&input)
 		switch input {
 		case 1:
-			// AksesLogin := _entity.AksesLogin{DB: conn}
 			result, idLogin, err := aksesUser.LoginUser(newUsers)
 			if err != nil {
 				fmt.Println("=====================================")
@@ -194,8 +187,6 @@ func main() {
 					fmt.Println(aksesRent.ReturnBuku(ID_Rent))
 				case 9:
 					var input int
-					// fmt.Println("ok")
-					// fmt.Println(aksesUser.MyBooks(idUserGlobal))
 					fmt.Println("====================")
 					fmt.Println("1. Daftar Buku Sewa")
 					fmt.Println("2. Daftar Buku Saya")
@@ -228,7 +219,6 @@ func main() {
 			if result.ID_User == 0 {
 				fmt.Println("====================")
 				fmt.Println("Tidak bisa input user")
-				// break
 			}
 			fmt.Println("=========================")
 			fmt.Println("=========================")
@@ -236,10 +226,8 @@ func main() {
 			fmt.Println("=========================")
 			fmt.Println("=========================")
 		case 3:
-			// fmt.Println("ok")
 			fmt.Println("==================================")
 			fmt.Println("Berikut adalah daftar seluruh buku")
-			// rescase3 := aksesBuku.GetAllData(daftarBuku)
 			for _, val := range aksesBuku.GetAllData() {
 				fmt.Println(val)
 			}
