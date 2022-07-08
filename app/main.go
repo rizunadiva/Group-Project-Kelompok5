@@ -47,11 +47,14 @@ func main() {
 			idUserGlobal = idLogin
 			for result {
 				var input2 int
+				fmt.Println("===================")
 				fmt.Println("\n=Login /berhasil=")
-				fmt.Println("\n=================")
+				fmt.Println("===================")
+				fmt.Println("===================")
 				fmt.Println("Selamat Datang\nPilih menu dibawah ini")
 				fmt.Println("1. Lihat Profil\n2. Edit Profil\n3. Hapus Profil\n4. Tambah Buku\n5. Sewa Buku\n6. Edit Buku\n7. Hapus Buku\n8. Kembalikan Buku\n9. Buku Saya\n100. keluar")
-				fmt.Println("===========")
+				fmt.Println("==================")
+				fmt.Println("==================")
 				fmt.Print("Pilih Menu : ")
 				fmt.Scanln(&input2)
 				switch input2 {
@@ -61,12 +64,16 @@ func main() {
 				case 1:
 					result1 := aksesUser.LihatProfile(idUserGlobal)
 					fmt.Println("==================")
+					fmt.Println("==================")
 					fmt.Println("Profil Anda")
 					fmt.Println("ID: ", result1.ID_User)
 					fmt.Println("Nama: ", result1.Nama)
 					fmt.Println("Username: ", result1.Username)
 					fmt.Println("Password: ", result1.Password)
+					fmt.Println("==================")
+					fmt.Println("==================")
 				case 2:
+					fmt.Println("====================")
 					fmt.Println("====================")
 					fmt.Println("Masukkan Nama Baru: ")
 					fmt.Scanln(&EditProfile.Nama)
@@ -76,10 +83,13 @@ func main() {
 					fmt.Scanln(&EditProfile.Password)
 
 					result2 := aksesUser.EditProfile(idUserGlobal, EditProfile)
-					fmt.Println("========================")
+					fmt.Println("================================")
+					fmt.Println("===Profil Berhasil Diperbarui===")
 					fmt.Println("Nama Baru", result2.Nama)
 					fmt.Println("Username Baru", result2.Username)
 					fmt.Println("Password Baru", result2.Password)
+					fmt.Println("================================")
+					fmt.Println("================================")
 					result = false
 				case 3:
 					var confirmDel int
@@ -97,6 +107,7 @@ func main() {
 
 				case 4:
 					fmt.Println("====================")
+					fmt.Println("====================")
 					fmt.Print("Masukkan Judul Buku: ")
 					fmt.Scanln(&newBuku.Judul_Buku)
 					fmt.Print("Masukkan Penulis: ")
@@ -112,11 +123,16 @@ func main() {
 					if resultBook.ID_Buku == 0 {
 						fmt.Println("======================")
 						fmt.Println("Tidak bisa tambah buku")
+						fmt.Println("======================")
 						break
 					}
 					fmt.Println("====================")
+					fmt.Println("====================")
 					fmt.Println("Berhasil Tambah Buku")
+					fmt.Println("====================")
+					fmt.Println("====================")
 				case 5:
+					fmt.Println("=================")
 					fmt.Println("=================")
 					fmt.Print("Masukkan ID anda: ")
 					fmt.Scanln(&Rental.ID_Penyewa)
@@ -130,9 +146,13 @@ func main() {
 						break
 					}
 					fmt.Println("==============")
+					fmt.Println("==============")
 					fmt.Println("Berhasil Sewa")
+					fmt.Println("==============")
+					fmt.Println("==============")
 				case 6:
 					var id_book int
+					fmt.Println("=================================")
 					fmt.Println("=================================")
 					fmt.Print("Masukkan ID Buku yang akan diedit: ")
 					fmt.Scanln(&id_book)
@@ -148,21 +168,26 @@ func main() {
 					fmt.Scanln(&editBuku.Sumber_Buku)
 
 					result6 := aksesBuku.EditBuku(id_book, editBuku)
-					fmt.Println("=====================")
+					fmt.Println("=========================")
+					fmt.Println("=========================")
 					fmt.Println("Judul Buku Baru", result6.Judul_Buku)
 					fmt.Println("Penulis Buku Baru", result6.Penulis)
 					fmt.Println("Penulis Buku Baru", result6.Penulis)
 					fmt.Println("Penerbit Buku Baru", result6.Penerbit)
 					fmt.Println("Tahun Terbit Baru", result6.Tahun_terbit)
+					fmt.Println("==========================")
+					fmt.Println("==========================")
 
 				case 7:
 					var ID_Buku int
+					fmt.Println("==================================")
 					fmt.Println("==================================")
 					fmt.Print("Masukkan ID Buku yang akan dihapus: ")
 					fmt.Scanln(&ID_Buku)
 					fmt.Println(aksesBuku.HapusBuku(ID_Buku))
 				case 8:
 					var ID_Rent int
+					fmt.Println("=======================================")
 					fmt.Println("=======================================")
 					fmt.Print("Masukkan ID Sewa yang akan dikembalikan: ")
 					fmt.Scanln(&ID_Rent)
@@ -191,6 +216,7 @@ func main() {
 
 		case 2:
 			fmt.Println("====================")
+			fmt.Println("====================")
 			fmt.Print("Masukkan nama: ")
 			fmt.Scanln(&newUsers.Nama)
 			fmt.Print("Masukkan username: ")
@@ -204,8 +230,11 @@ func main() {
 				fmt.Println("Tidak bisa input user")
 				// break
 			}
-			fmt.Println("====================")
-			fmt.Println("Berhasil input user")
+			fmt.Println("=========================")
+			fmt.Println("=========================")
+			fmt.Println("Berhasil Registrasi Akun!")
+			fmt.Println("=========================")
+			fmt.Println("=========================")
 		case 3:
 			// fmt.Println("ok")
 			fmt.Println("==================================")
@@ -216,6 +245,7 @@ func main() {
 			}
 		}
 	}
-	fmt.Println("==================")
-	fmt.Println("Terima Kasih")
+	fmt.Println("============================================")
+	fmt.Println("Terima Kasih Telah Menggunakan Rent Book App")
+	fmt.Println("============================================")
 }
