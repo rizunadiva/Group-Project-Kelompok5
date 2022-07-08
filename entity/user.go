@@ -79,15 +79,6 @@ func (au *AksesUsers) HapusProfile(id_user uint, DeleteUser Users) Users {
 	return DeleteUser
 }
 
-// var Books _entity.Books
-// func (au *AksesUsers) daftarBukuSaya(id_user uint, rent []Rent, book []Books) []Rent {
-// 	err := au.DB.Select("id_penyewa", "id_buku").First(&rent, "id_user = ?", id_user)
-// 	if err.Error != nil {
-// 		log.Fatal(err.Statement.SQL.String())
-// 		return nil
-// 	}
-// 	return rent
-// }
 func (au *AksesUsers) MyBooks(id_user uint) []Rent {
 	// var rent []Rent
 	// var id_penyewa int

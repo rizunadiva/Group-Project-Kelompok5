@@ -100,7 +100,7 @@ func main() {
 					fmt.Scanln(&confirmDel)
 					switch confirmDel {
 					case 1:
-						// fmt.Scanln(&confirmDelete.ID_User)
+
 						result3 := aksesUser.HapusProfile(idUserGlobal, DeleteUser)
 						fmt.Print(result3)
 					}
